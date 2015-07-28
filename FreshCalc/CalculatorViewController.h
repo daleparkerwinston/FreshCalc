@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InfixToPostfix.h"
+#import "PostfixCalculator.h"
+#import "EquationStack.h"
 
 @class CalculatorButton;
+@class CalculatorLabel;
 
 @interface CalculatorViewController : UIViewController
 

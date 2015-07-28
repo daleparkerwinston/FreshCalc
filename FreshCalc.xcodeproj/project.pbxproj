@@ -21,6 +21,7 @@
 		2D506E1A1B66B6F300CF3B01 /* InfixToPostfix.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D506E141B66B6F300CF3B01 /* InfixToPostfix.m */; };
 		2D506E1B1B66B6F300CF3B01 /* Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D506E161B66B6F300CF3B01 /* Operation.m */; };
 		2D506E1C1B66B6F300CF3B01 /* PostfixCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D506E191B66B6F300CF3B01 /* PostfixCalculator.m */; };
+		2D506E221B68231B00CF3B01 /* EquationStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D506E211B68231B00CF3B01 /* EquationStack.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		2D506E171B66B6F300CF3B01 /* OperationType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperationType.h; sourceTree = "<group>"; };
 		2D506E181B66B6F300CF3B01 /* PostfixCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostfixCalculator.h; sourceTree = "<group>"; };
 		2D506E191B66B6F300CF3B01 /* PostfixCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostfixCalculator.m; sourceTree = "<group>"; };
+		2D506E201B68231B00CF3B01 /* EquationStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquationStack.h; sourceTree = "<group>"; };
+		2D506E211B68231B00CF3B01 /* EquationStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquationStack.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +107,8 @@
 		2D4A061C1B66A3980081F80F /* FreshCalc */ = {
 			isa = PBXGroup;
 			children = (
+				2D506E201B68231B00CF3B01 /* EquationStack.h */,
+				2D506E211B68231B00CF3B01 /* EquationStack.m */,
 				2D4A06211B66A3980081F80F /* AppDelegate.h */,
 				2D4A06221B66A3980081F80F /* AppDelegate.m */,
 				2D506E061B66B58100CF3B01 /* CalculatorViewController.h */,
@@ -273,6 +278,7 @@
 			files = (
 				2D4A06231B66A3980081F80F /* AppDelegate.m in Sources */,
 				2D506E111B66B66B00CF3B01 /* CalculatorScrollView.m in Sources */,
+				2D506E221B68231B00CF3B01 /* EquationStack.m in Sources */,
 				2D506E081B66B58100CF3B01 /* CalculatorViewController.m in Sources */,
 				2D506E1A1B66B6F300CF3B01 /* InfixToPostfix.m in Sources */,
 				2D506E0E1B66B62600CF3B01 /* CalculatorLabel.m in Sources */,

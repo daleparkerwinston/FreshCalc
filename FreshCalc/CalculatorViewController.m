@@ -10,13 +10,30 @@
 
 @interface CalculatorViewController ()
 
+@property (weak, nonatomic) IBOutlet CalculatorLabel *tapeLabel;
+@property (weak, nonatomic) IBOutlet CalculatorLabel *resultLabel;
+
+@property (nonatomic) InfixToPostfix *infixToPostfix;
+@property (nonatomic) PostfixCalculator *postfixCalculator;
+
+@property (nonatomic) EquationStack *equationTokens;
+
 @end
+
+
 
 @implementation CalculatorViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self initializeObjects];
+}
+
+- (void)initializeObjects {
+    self.infixToPostfix = [[InfixToPostfix alloc] init];
+    self.postfixCalculator = [[PostfixCalculator alloc] init];
+    self.equationTokens = [[EquationStack alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,8 +41,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
 //Button Presses
 - (IBAction)integerPressed:(CalculatorButton *)sender {
+    
 }
 
 - (IBAction)zeroPressed:(CalculatorButton *)sender {
