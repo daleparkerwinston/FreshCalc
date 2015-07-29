@@ -18,4 +18,8 @@
 
 - (void)clear;
 
+- (BOOL)isLastObjectNumber;
+
+- (NSString *)toString;
+
 @end

@@ -111,6 +111,9 @@
                                         <state key="normal" title="1">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="integerPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2HS-Dr-Ug5"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sld-w8-MKL" customClass="CalculatorButton">
                                         <rect key="frame" x="0.0" y="184" width="150" height="92"/>
@@ -118,7 +121,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="integerPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j4N-wx-eOu"/>
+                                            <action selector="integerPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OUG-WM-nVP"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ALc-vO-8fP" customClass="CalculatorButton">
@@ -126,6 +129,9 @@
                                         <state key="normal" title="7">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="integerPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JaX-R7-KsS"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rke-Bc-UBL" customClass="CalculatorButton">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="92"/>
@@ -141,18 +147,27 @@
                                         <state key="normal" title="2">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="integerPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yBN-Ob-PVr"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M79-m1-WuD" customClass="CalculatorButton">
                                         <rect key="frame" x="150" y="184" width="150" height="92"/>
                                         <state key="normal" title="5">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="integerPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s6r-6j-ybj"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7a-JD-rOd" customClass="CalculatorButton">
                                         <rect key="frame" x="150" y="92" width="150" height="92"/>
                                         <state key="normal" title="8">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="integerPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2wM-0T-oG7"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQD-wi-5l3" customClass="CalculatorButton">
                                         <rect key="frame" x="150" y="0.0" width="150" height="92"/>
@@ -168,6 +183,9 @@
                                         <state key="normal" title="3">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="integerPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Eme-LJ-oF4"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVi-5y-FHU" customClass="CalculatorButton">
                                         <rect key="frame" x="300" y="184" width="150" height="92"/>

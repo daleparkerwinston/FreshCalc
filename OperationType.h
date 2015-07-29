@@ -13,7 +13,11 @@ typedef enum {
     add,
     subtract,
     multiply,
-    divide
+    divide,
+    leftParanthesis,
+    rightParanthesis,
+    positiveNegative,
+    percent
 } OperationType;
 
 #endif

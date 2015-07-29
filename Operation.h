@@ -14,6 +14,11 @@
 @property OperationType type;
 @property int precedence;
 
-- (id)initWithType:(OperationType)operationType precedence:(int)precedence;
+- (id)initWithType:(OperationType)operationType;
+
+- (void)setPrecedence;
+
+- (NSString *)stringValue;
+
 
 @end

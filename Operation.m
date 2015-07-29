@@ -8,15 +8,60 @@
 
 #import "Operation.h"
 
+@interface Operation ()
+
+@end
+
 @implementation Operation
 
-- (id)initWithType:(OperationType)operationType precedence:(int)precedence {
+- (id)initWithType:(OperationType)operationType {
     self = [super init];
     if (self) {
         self.type = operationType;
-        self.precedence = precedence;
+        [self setPrecedence];
     }
     return self;
+}
+
+
+- (void)setPrecedence {
+    switch (self.type) {
+        case add:
+            self.precedence = 0;
+            break;
+        case subtract:
+            self.precedence = 0;
+            break;
+        case multiply:
+            self.precedence = 10;
+            break;
+        case divide:
+            self.precedence = 10;
+            break;
+        default:
+            self.precedence = -1;
+            break;
+    }
+}
+
+- (NSString *)stringValue {
+    switch (self.type) {
+        case add:
+            return @"+";
+            break;
+        case subtract:
+            return @"-";
+            break;
+        case multiply:
+            return @"x";
+            break;
+        case divide:
+            return @"÷";
+            break;
+        default:
+            return @"";
+            break;
+    }
 }
 
 @end
