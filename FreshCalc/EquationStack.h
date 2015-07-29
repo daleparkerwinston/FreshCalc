@@ -18,7 +18,7 @@
 
 - (void)clear;
 
-- (BOOL)isLastObjectNumber;
+- (BOOL)isLastObjectString;
 
 - (NSString *)toString;
 

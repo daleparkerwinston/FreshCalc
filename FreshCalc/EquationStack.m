@@ -46,8 +46,8 @@
     return [self.array count];
 }
 
-- (BOOL)isLastObjectNumber {
-    if ([[self peek] isKindOfClass:[NSDecimalNumber class]]) {
+- (BOOL)isLastObjectString {
+    if ([[self peek] isKindOfClass:[NSString class]]) {
         return YES;
     } else {
         return NO;
@@ -58,7 +58,12 @@
     NSString *equation = @"";
     NSLog([NSString stringWithFormat:@"%i", [self count]]);
     for (int i = 0; i < [self count]; i++) {
-        equation = [equation stringByAppendingString:[[self.array objectAtIndex:i] stringValue]];
+        if ([[self.array objectAtIndex:i] isKindOfClass:[NSString class]]) {
+            equation = [equation stringByAppendingString:[self.array objectAtIndex:i]];
+        } else {
+            equation = [equation stringByAppendingString:[[self.array objectAtIndex:i] stringValue]];
+
+        }
     }
     NSLog(equation);
     return equation;

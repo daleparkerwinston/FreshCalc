@@ -18,12 +18,6 @@
 
 @property (nonatomic) EquationStack *equationTokens;
 
-@property (nonatomic) NSString *currentNumberString;
-
-@property (nonatomic) BOOL addDecimal;
-
-
-
 @end
 
 
@@ -40,9 +34,7 @@
     self.infixToPostfix = [[InfixToPostfix alloc] init];
     self.postfixCalculator = [[PostfixCalculator alloc] init];
     self.equationTokens = [[EquationStack alloc] init];
-    
-    self.currentNumberString = @"";
-    self.addDecimal = NO;
+    [self clearLabels];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,22 +46,15 @@
 
 //Button Presses
 - (IBAction)integerPressed:(UIButton *)sender {
-    NSDecimalNumber *newNumber = [[NSDecimalNumber alloc]init];
-    if ([self.equationTokens isLastObjectNumber]) {
-        NSString *lastNumber = [[self.equationTokens pop] stringValue];
-        lastNumber = [lastNumber stringByAppendingString:sender.currentTitle];
-        newNumber = [NSDecimalNumber decimalNumberWithString:lastNumber];
-    } else if (self.addDecimal == YES) {
-        NSString *withDecimal = [NSString stringWithFormat:@".%@", sender.currentTitle];
-        newNumber = [NSDecimalNumber decimalNumberWithString:withDecimal];
-    }
-    else {
-        newNumber = [NSDecimalNumber decimalNumberWithString:sender.currentTitle];
+    NSString *newNumberString = [[NSString alloc] init];
+    if ([self.equationTokens isLastObjectString]) {
+        newNumberString = [self.equationTokens pop];
+        newNumberString = [newNumberString stringByAppendingString:sender.currentTitle];
+    } else {
+        newNumberString = sender.currentTitle;
     }
     
-    [self.equationTokens push:newNumber];
-    [self printTape];
-    [self printResult];
+    [self updateWithNumber:newNumberString];
 }
 
 - (IBAction)zeroPressed:(UIButton *)sender {
@@ -77,43 +62,32 @@
 }
 
 - (IBAction)decimalPressed:(UIButton *)sender {
-    if ([self.equationTokens isLastObjectNumber]) {
-        NSDecimalNumber *newNumber = [[NSDecimalNumber alloc] init];
-        NSString *lastNumber = [[self.equationTokens pop] stringValue];
-        if ([lastNumber containsString:sender.currentTitle] == NO) {
-            lastNumber = [lastNumber stringByAppendingString:sender.currentTitle];
-            newNumber = [NSDecimalNumber decimalNumberWithString:lastNumber];
+    NSString *newNumberString = [[NSString alloc] init];
+    if ([self.equationTokens isLastObjectString]) {
+        newNumberString = [self.equationTokens pop];
+        if ([newNumberString containsString:sender.currentTitle] == NO) {
+            newNumberString = [newNumberString stringByAppendingString:sender.currentTitle];
         }
-        [self.equationTokens push:newNumber];
-        [self printTape];
-        [self printResult];
     } else {
-        self.addDecimal = YES;
-        [self appendToTape:sender.currentTitle];
+        newNumberString = sender.currentTitle;
     }
+    
+    [self updateWithNumber:newNumberString];
 }
 
 - (IBAction)equalPressed:(UIButton *)sender {
 }
 - (IBAction)additionPressed:(UIButton *)sender {
-    Operation *operation = [[Operation alloc] initWithType:add];
-    [self.equationTokens push:operation];
-    [self printTape];
+    [self updateWithOperation:add];
 }
 - (IBAction)subtractPressed:(UIButton *)sender {
-    Operation *operation = [[Operation alloc] initWithType:subtract];
-    [self.equationTokens push:operation];
-    [self printTape];
+    [self updateWithOperation:subtract];
 }
 - (IBAction)multiplyPressed:(UIButton *)sender {
-    Operation *operation = [[Operation alloc] initWithType:multiply];
-    [self.equationTokens push:operation];
-    [self printTape];
+    [self updateWithOperation:multiply];
 }
 - (IBAction)dividePressed:(UIButton *)sender {
-    Operation *operation = [[Operation alloc] initWithType:divide];
-    [self.equationTokens push:operation];
-    [self printTape];
+    [self updateWithOperation:divide];
 }
 - (IBAction)leftParanthesisPressed:(UIButton *)sender {
 }
@@ -124,22 +98,57 @@
 - (IBAction)percentPressed:(UIButton *)sender {
 }
 - (IBAction)deletePressed:(UIButton *)sender {
-    if ([self.equationTokens isLastObjectNumber]) {
-        
+    if ([self.equationTokens count] > 0) {
+        if ([self.equationTokens isLastObjectString]) {
+            if ([[self.equationTokens peek] length] >1) { //remove right digit from number
+                NSString *newNumber = [self.equationTokens pop];
+                newNumber = [newNumber substringToIndex:[newNumber length] - 1];
+                [self updateWithNumber:newNumber];
+                
+            } else if ([self.equationTokens count] > 1) { // to show previous result without operation
+                [self.equationTokens pop];
+                [self printTape];
+                Operation *temp = [self.equationTokens pop];
+                [self printResult];
+                [self.equationTokens push:temp];
+            } else { //only 1 number left with one digit so clear stack and labels
+                [self.equationTokens pop];
+                [self clearLabels];
+            }
+        } else { //last object in stack was an operation, just delete the operation from stack and label, result is the same
+            [self.equationTokens pop];
+            [self printTape];
+        }
     }
-    self.tapeLabel.text = [self.equationTokens toString];
+}
+
+
+//Helper Methods
+- (void)updateWithNumber:(NSString *) numberString {
+    [self.equationTokens push:numberString];
+    [self printTape];
+    [self printResult];
+}
+
+- (void)updateWithOperation:(OperationType) operationType {
+    if ([self.equationTokens isLastObjectString] == YES) {
+        Operation *operation = [[Operation alloc] initWithType:operationType];
+        [self.equationTokens push:operation];
+        [self printTape];
+    }
 }
 
 - (void)printTape {
     self.tapeLabel.text = [self.equationTokens toString];
 }
 
-- (void)appendToTape:(NSString *)withString {
-    self.tapeLabel.text = [self.tapeLabel.text stringByAppendingString:withString];
-}
-
 - (void)printResult {
     self.resultLabel.text = [self.postfixCalculator calculateWithString:[self.infixToPostfix toPostfixWithString:[self.equationTokens toString]]];
+}
+
+- (void)clearLabels {
+    self.tapeLabel.text = @"";
+    self.resultLabel.text = @"";
 }
 
 /*
