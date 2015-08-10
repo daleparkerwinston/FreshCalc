@@ -22,6 +22,7 @@
 		2D506E1B1B66B6F300CF3B01 /* Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D506E161B66B6F300CF3B01 /* Operation.m */; };
 		2D506E1C1B66B6F300CF3B01 /* PostfixCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D506E191B66B6F300CF3B01 /* PostfixCalculator.m */; };
 		2D506E221B68231B00CF3B01 /* EquationStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D506E211B68231B00CF3B01 /* EquationStack.m */; };
+		2DC336FA1B78FF5200D57D89 /* Parenthesis.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC336F91B78FF5200D57D89 /* Parenthesis.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		2D506E191B66B6F300CF3B01 /* PostfixCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostfixCalculator.m; sourceTree = "<group>"; };
 		2D506E201B68231B00CF3B01 /* EquationStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquationStack.h; sourceTree = "<group>"; };
 		2D506E211B68231B00CF3B01 /* EquationStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquationStack.m; sourceTree = "<group>"; };
+		2DC336F81B78FF5200D57D89 /* Parenthesis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parenthesis.h; sourceTree = "<group>"; };
+		2DC336F91B78FF5200D57D89 /* Parenthesis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parenthesis.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +161,8 @@
 				2D506E171B66B6F300CF3B01 /* OperationType.h */,
 				2D506E181B66B6F300CF3B01 /* PostfixCalculator.h */,
 				2D506E191B66B6F300CF3B01 /* PostfixCalculator.m */,
+				2DC336F81B78FF5200D57D89 /* Parenthesis.h */,
+				2DC336F91B78FF5200D57D89 /* Parenthesis.m */,
 			);
 			name = PostfixCalculator;
 			sourceTree = "<group>";
@@ -281,6 +286,7 @@
 				2D506E221B68231B00CF3B01 /* EquationStack.m in Sources */,
 				2D506E081B66B58100CF3B01 /* CalculatorViewController.m in Sources */,
 				2D506E1A1B66B6F300CF3B01 /* InfixToPostfix.m in Sources */,
+				2DC336FA1B78FF5200D57D89 /* Parenthesis.m in Sources */,
 				2D506E0E1B66B62600CF3B01 /* CalculatorLabel.m in Sources */,
 				2D4A06201B66A3980081F80F /* main.m in Sources */,
 				2D506E1C1B66B6F300CF3B01 /* PostfixCalculator.m in Sources */,
