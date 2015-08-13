@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "InfixToPostfix.h"
 #import "PostfixCalculator.h"
-#import "EquationStack.h"
+#import "NSMutableArray+StackExtensions.h"
 
 @class CalculatorButton;
 @class CalculatorLabel;

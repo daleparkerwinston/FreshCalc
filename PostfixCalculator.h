@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Operation.h"
+#import "NSMutableArray+StackExtensions.h"
 
 @interface PostfixCalculator : NSObject
 
-- (id)init;
-
-- (NSString *)calculateWithString:(NSString *)postfixString;
+- (NSString *)calculateWith:(NSMutableArray *)tokens;
 
 @end

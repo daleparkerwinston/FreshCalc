@@ -18,28 +18,48 @@
     self = [super init];
     if (self) {
         self.type = operationType;
-        [self setPrecedence];
+        [self setValues];
     }
     return self;
 }
 
 
-- (void)setPrecedence {
+- (void)setValues {
     switch (self.type) {
         case add:
             self.precedence = 0;
+            self.isLeftAssociative = true;
+            self.isParenthesis = false;
             break;
         case subtract:
             self.precedence = 0;
+            self.isLeftAssociative = true;
+            self.isParenthesis = false;
             break;
         case multiply:
             self.precedence = 10;
+            self.isLeftAssociative = true;
+            self.isParenthesis = false;
             break;
         case divide:
             self.precedence = 10;
+            self.isLeftAssociative = true;
+            self.isParenthesis = false;
+            break;
+        case leftParanthesis:
+            self.precedence = -1;
+            self.isLeftAssociative = false;
+            self.isParenthesis = true;
+            break;
+        case rightParanthesis:
+            self.precedence = -1;
+            self.isLeftAssociative = false;
+            self.isParenthesis = true;
             break;
         default:
             self.precedence = -1;
+            self.isLeftAssociative = false;
+            self.isParenthesis = false;
             break;
     }
 }
@@ -58,10 +78,20 @@
         case divide:
             return @"÷";
             break;
+        case leftParanthesis:
+            return @"(";
+            break;
+        case rightParanthesis:
+            return @")";
+            break;
         default:
             return @"";
             break;
     }
+}
+
+- (OperationType)getType {
+    return [self type];
 }
 
 @end

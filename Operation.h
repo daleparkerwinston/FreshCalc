@@ -13,12 +13,16 @@
 
 @property OperationType type;
 @property int precedence;
+@property BOOL isLeftAssociative;
+@property BOOL isParenthesis;
+@property BOOL addMultiplyOperator;
 
 - (id)initWithType:(OperationType)operationType;
 
-- (void)setPrecedence;
+- (void)setValues;
 
 - (NSString *)stringValue;
 
+- (OperationType)getType;
 
 @end

@@ -9,11 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "Operation.h"
 #import "OperationType.h"
+#import "NSMutableArray+StackExtensions.h"
 
 @interface InfixToPostfix : NSObject
 
-- (id)init;
-
-- (NSString *)toPostfixWithString:(NSString *)infixString;
+- (NSMutableArray *)toPostfixArray:(NSMutableArray *)infixArray;
 
 @end

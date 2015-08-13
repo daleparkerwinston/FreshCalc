@@ -16,7 +16,9 @@
 @property (nonatomic) InfixToPostfix *infixToPostfix;
 @property (nonatomic) PostfixCalculator *postfixCalculator;
 
-@property (nonatomic) EquationStack *equationTokens;
+@property (nonatomic) NSMutableArray *equationTokens;
+
+@property (nonatomic) BOOL addRightParenthesis;
 
 @end
 
@@ -33,7 +35,7 @@
 - (void)initializeObjects {
     self.infixToPostfix = [[InfixToPostfix alloc] init];
     self.postfixCalculator = [[PostfixCalculator alloc] init];
-    self.equationTokens = [[EquationStack alloc] init];
+    self.equationTokens = [[NSMutableArray alloc] init];
     [self clearLabels];
 }
 
@@ -90,8 +92,12 @@
     [self updateWithOperation:divide];
 }
 - (IBAction)leftParanthesisPressed:(UIButton *)sender {
+    self.addRightParenthesis = YES;
+    [self updateWithParenthesis:leftParanthesis];
 }
 - (IBAction)rightParanthesisPressed:(UIButton *)sender {
+    self.addRightParenthesis = NO;
+    [self updateWithParenthesis:rightParanthesis];
 }
 - (IBAction)postiveNegativePressed:(UIButton *)sender {
 }
@@ -131,11 +137,18 @@
 }
 
 - (void)updateWithOperation:(OperationType) operationType {
-    if ([self.equationTokens isLastObjectString] == YES) {
+    if ([self.equationTokens isLastObjectString] || [[self.equationTokens peek] isParenthesis]) {
         Operation *operation = [[Operation alloc] initWithType:operationType];
         [self.equationTokens push:operation];
         [self printTape];
     }
+}
+
+- (void)updateWithParenthesis:(OperationType) operationType {
+    
+    Operation *operation = [[Operation alloc] initWithType:operationType];
+    [self.equationTokens push:operation];
+    [self printTape];
 }
 
 - (void)printTape {
@@ -143,12 +156,24 @@
 }
 
 - (void)printResult {
-    self.resultLabel.text = [self.postfixCalculator calculateWithString:[self.infixToPostfix toPostfixWithString:[self.equationTokens toString]]];
+    if (self.addRightParenthesis == YES) {
+        [self.equationTokens push:[[Operation alloc] initWithType:rightParanthesis]];
+    }
+    NSString *result = [self.postfixCalculator calculateWith:[self.infixToPostfix  toPostfixArray:self.equationTokens]];
+    if (![result compare:@"NaN"]) {
+        result = @"Error";
+    }
+    self.resultLabel.text = result;
+    
+    if (self.addRightParenthesis == YES) {
+        [self.equationTokens pop];
+    }
 }
 
 - (void)clearLabels {
     self.tapeLabel.text = @"";
     self.resultLabel.text = @"";
+    self.addRightParenthesis = NO;
 }
 
 /*

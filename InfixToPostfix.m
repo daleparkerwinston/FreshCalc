@@ -17,126 +17,54 @@
 
 @implementation InfixToPostfix
 
-- (id)init {
-    self = [super self];
-    if (self) {
-        //initialize with a marker to show empty stack
-        _theStack = [[NSMutableArray alloc] initWithObjects: nil];
-        _postfixString = [[NSMutableString alloc] initWithString:@""];
-    }
-    return self;
-}
 
-- (NSString *)toPostfixWithString:(NSString *)infixString {
-    [_postfixString setString:@""];
+- (NSMutableArray *)toPostfixArray:(NSMutableArray *)infixArray {
+    NSMutableArray *outputQueue = [[NSMutableArray alloc] init];
+    NSMutableArray *operatorStack = [[NSMutableArray alloc] init];
     
-    [infixString stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-    //scan string from left to right
-    for (int i = 0; i < infixString.length; i++) {
-        //check for a number
-        unichar currentCharacter = [infixString characterAtIndex:i];
-        if ((currentCharacter >='0' && currentCharacter <='9') || currentCharacter == '.') {
-            //we have a number
-            [_postfixString appendString:[NSString stringWithCharacters:&currentCharacter length:1]];
-        }
-        else {
-            //must be an operation
-            
-            //first end the current number by placing a '@'
-            //this will seperate numbers
-            
-            [_postfixString appendString:@"@"];
-            
-            //make an Operation object
-            //check what the operation is first
-            NSRange range = NSMakeRange(i, 1);
-            NSString *currentOperationString = [infixString substringWithRange:range];
-            
-            Operation *operation = [[Operation alloc] init];
-            if ([currentOperationString isEqualToString:@"+"]) {
-                operation.type = add;
-                operation.precedence = 0;
-            } else if ([currentOperationString isEqualToString:@"-"]) {
-                operation.type = subtract;
-                operation.precedence = 0;
-            } else if ([currentOperationString isEqualToString:@"x"]) {
-                operation.type = multiply;
-                operation.precedence = 10;
-            } else if ([currentOperationString isEqualToString:@"÷"]) {
-                operation.type = divide;
-                operation.precedence = 10;
-            }
-            
-            //if the stack is empty add it to the stack
-            if ([_theStack count] == 0) {
-                [_theStack addObject:operation];
-            }
-            //the stack is not empty
-            else {
-                //if the top object on the stack has a lower precedence than the new operation
-                //add the new operation to the stack
-                
-                //or else the object on the stack has a greater than or equal
-                //precedence then
-                //we pop the top object
-                while (operation.precedence <= [[_theStack lastObject] precedence]) {
-                    if ([_theStack lastObject] == nil) {
-                        break;
-                    }
-                    //pop the last object and add it to the postfixstring
-                    Operation *topObject = [_theStack lastObject];
-                    [_theStack removeLastObject];
-                    switch (topObject.type) {
-                        case add:
-                            [_postfixString appendString:@"+"];
-                            break;
-                        case subtract:
-                            [_postfixString appendString:@"-"];
-                            break;
-                        case multiply:
-                            [_postfixString appendString:@"x"];
-                            break;
-                        case divide:
-                            [_postfixString appendString:@"÷"];
-                            break;
-                        default:
-                            break;
-                    }
-                    [_postfixString appendString:@"@"];
-                }
-                [_theStack addObject:operation];
-            }
-        }
-    }
-    
-    while ([_theStack count] > 0) {
-        Operation *topObject = [_theStack lastObject];
-        [_theStack removeLastObject];
-        [_postfixString appendString:@"@"];
-        switch (topObject.type) {
-            case add:
-                [_postfixString appendString:@"+"];
-                break;
-            case subtract:
-                [_postfixString appendString:@"-"];
-                break;
-            case multiply:
-                [_postfixString appendString:@"x"];
-                break;
-            case divide:
-                [_postfixString appendString:@"÷"];
-                break;
-                
-            default:
-                break;
+    for (id currentToken in infixArray) {
+        //id currentToken = [infixArray objectAtIndex:i];
+        
+        //object is a number
+        if ([currentToken isKindOfClass:[NSString class]]) {
+            [outputQueue addObject:currentToken];
         }
         
-
+        //object is an operator
+        else if ([currentToken isParenthesis] == false){
+            if ([[operatorStack peek] isKindOfClass:[Operation class]]) {
+                if ([[operatorStack peek] isParenthesis] == false) {
+                    if ([currentToken isLeftAssociative] == true && [currentToken precedence] <= [[operatorStack peek] precedence]) {
+                        [outputQueue addObject:[operatorStack pop]];
+                    } else if ([currentToken isLeftAssociative] == false && [currentToken precedence] < [[operatorStack peek] precedence]) {
+                        [outputQueue addObject:[operatorStack pop]];
+                    }
+                }
+            }
+            [operatorStack push:currentToken];
+        }
+        
+        //object is a parenthesis
+        else if ([currentToken getType] == leftParanthesis) {
+            [operatorStack push:currentToken];
+        }
+        
+        else if ([currentToken getType] == rightParanthesis) {
+            while ([[operatorStack peek] getType] != leftParanthesis) {
+                [outputQueue addObject:[operatorStack pop]];
+            }
+            [operatorStack pop];
+        }
     }
-
-    return _postfixString;
+    
+    while ([operatorStack count] > 0) {
+        [outputQueue addObject:[operatorStack pop]];
+    }
+    return outputQueue;
 }
+
+
+
 
 //private methods
 
